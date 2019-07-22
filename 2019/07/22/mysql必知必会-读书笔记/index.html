@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Myhere1的技术小屋</title>
+  <title>mysql必知必会 读书笔记 | Myhere1的技术小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Myhere1的技术小屋">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯  不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值     第三章 使用MySQL 显示表列 show columns from 表名;(describe 表名) 自增 auto_incremen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql必知必会 读书笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/mysql必知必会-读书笔记/index.html">
 <meta property="og:site_name" content="Myhere1的技术小屋">
+<meta property="og:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯  不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值     第三章 使用MySQL 显示表列 show columns from 表名;(describe 表名) 自增 auto_incremen">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-22T00:53:29.615Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Myhere1的技术小屋">
+<meta name="twitter:title" content="mysql必知必会 读书笔记">
+<meta name="twitter:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯  不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值     第三章 使用MySQL 显示表列 show columns from 表名;(describe 表名) 自增 auto_incremen">
   
     <link rel="alternative" href="/atom.xml" title="Myhere1的技术小屋" type="application/atom+xml">
   
@@ -142,103 +146,289 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-mysql必知必会-读书笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      mysql必知必会 读书笔记
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/22/mysql必知必会-读书笔记/" class="archive-article-date">
+
+        
+        <a href="/2019/07/22/mysql必知必会-读书笔记/" class="archive-article-date">
   	<time datetime="2019-07-22T00:02:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/22/mysql必知必会-读书笔记/">mysql必知必会 读书笔记</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章-了解SQL"><a href="#第一章-了解SQL" class="headerlink" title="第一章 了解SQL"></a>第一章 了解SQL</h2><h3 id="数据库概念"><a href="#数据库概念" class="headerlink" title="数据库概念"></a>数据库概念</h3><p>​   数据库是一种以某种有组织的方式存储的数据集合</p>
+<h3 id="主键的条件"><a href="#主键的条件" class="headerlink" title="主键的条件"></a>主键的条件</h3><ul>
+<li>任意两行都不惧有相同的主键值</li>
+<li>每个行都必须具有一个主键值(不允许存在null)</li>
+<li><p>好习惯</p>
+<ul>
+<li>不更新主键列中的值</li>
+<li>不重用主键列中的值</li>
+<li>不再主键列中使用可能会更改的值</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h2 id="第三章-使用MySQL"><a href="#第三章-使用MySQL" class="headerlink" title="第三章 使用MySQL"></a>第三章 使用MySQL</h2><ul>
+<li>显示表列 show columns from 表名;(describe 表名)</li>
+<li>自增 auto_increment</li>
+<li>显示建表语句 show create table 表名;</li>
+<li>显示建数据库语句 show create database 数据库名;</li>
+</ul>
+<hr>
+<h2 id="第四章-索引数据"><a href="#第四章-索引数据" class="headerlink" title="第四章 索引数据"></a>第四章 索引数据</h2><ul>
+<li>去处重复 select DISTINCT 列名 from 表名<ul>
+<li>DISTINCT作用于后面的所有列，使用了这个关键字除非后面的列都相等，否则会全部都索引出来。</li>
+</ul>
+</li>
+<li>限制结果 select 列名 from 表名 limit 5;<ul>
+<li>表示返回前5行</li>
+<li>为了得出下一个五行 select 列名 from 表名 limit 5,5;<ul>
+<li>从第五行开始往后索引5条记录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第五章-排序索引数据"><a href="#第五章-排序索引数据" class="headerlink" title="第五章 排序索引数据"></a>第五章 排序索引数据</h2><ul>
+<li>关系数据库设计理论认为，如果不能明确规定排序顺序，则不应该假定索引出的数据的顺序有意义。</li>
+<li>数据排序 select 列名 from 表名 order by 列名;<ul>
+<li>在where关键字之后使用</li>
+<li>可以使用非索引的列作为排序的依据</li>
+<li>也可以用多个列作为排序的依据，按代码的顺序，来决定主次，如果主列中的值都是唯一的，则不会用次列的值排序</li>
+<li>数据逆序排列 select 列名 from 表名 order by 列名 DESC;<ul>
+<li>在需要逆序排列的列名后加上DESC关键字</li>
+<li>正序是ASC，是默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第六章-过滤数据"><a href="#第六章-过滤数据" class="headerlink" title="第六章 过滤数据"></a>第六章 过滤数据</h2><hr>
+<h2 id="第七章-数据过滤"><a href="#第七章-数据过滤" class="headerlink" title="第七章 数据过滤"></a>第七章 数据过滤</h2><ul>
+<li>在where之后and的优先级比or要高，所以在多条件组合时要注意，尽量用括号来解决。</li>
+<li>IN ()用来指定条件范围，范围中的每个条件都可以进行匹配<ul>
+<li>IN的优点<ul>
+<li>语法更清除直观</li>
+<li>计算次序更容易管理</li>
+<li>IN操作符比OR操作符清单执行更快</li>
+<li>IN的可以包含其他select语句，能够动态的建立Where子句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NOT操作符否定之后所跟的任何条件<ul>
+<li>MySQL支持对IN、BETWEEN、EXISTS子句取反</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第八章-用通配符进行过滤"><a href="#第八章-用通配符进行过滤" class="headerlink" title="第八章 用通配符进行过滤"></a>第八章 用通配符进行过滤</h2><ul>
+<li>% 表示任何字符出现任意次数(甚至是0次)<ul>
+<li>但是%通配符不能匹配null</li>
+</ul>
+</li>
+<li>_ 表示任何字符出现一次</li>
+<li>关于通配符的技巧<ul>
+<li>通配符会让搜索时间变长</li>
+<li>不要过度使用通配符，如果其他操作可以达到相同的目的，就应该使用其他操作符</li>
+<li>确实需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处</li>
+<li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第九章-用正则表达式进行搜索"><a href="#第九章-用正则表达式进行搜索" class="headerlink" title="第九章 用正则表达式进行搜索"></a>第九章 用正则表达式进行搜索</h2><ul>
+<li>MySQL正则表达式<ul>
+<li>REGEXP 与 like用法一致，后面跟的是正则表达式</li>
+<li>MySQL中的正则表达式匹配不区分大小写，为区分大小写，可以使用BINARY关键字，如:where 列名 REGEXP BINARY ‘字符串’;</li>
+<li>比起LIKE匹配整串而REGEXP匹配子串</li>
+</ul>
+</li>
+<li>正则表达式<ul>
+<li>. 表示任意一个字符</li>
+<li>| 表示或</li>
+<li>[和] [123]表示1或2或3，可以理解为[1|2|3]<ul>
+<li>可以用^来取反 [^123]就匹配除这些字符以外的字符</li>
+<li>[0-9] 匹配数字0-9</li>
+<li>[a-z] 匹配所有的字母</li>
+</ul>
+</li>
+<li>当需要匹配特殊符号时 采用加\(两个反斜杠)的方式来区分\.表示.</li>
+<li>下面的标示用来标示前面一个字符<ul>
+<li><ul>
+<li>: 表示0个或多个匹配  + : 表示1个或多个匹配  ? : 表示0个或1个匹配</li>
+</ul>
+</li>
+<li>{n} : 指定数目的匹配 {n,} : 不少于指定数目的匹配 {n,m} : 匹配数目的范围(m不超过255)</li>
+<li>可以用[0-9]{4}或者[[:digit:]]{4}来代表4个数字</li>
+</ul>
+</li>
+<li>定位符<ul>
+<li>^ : 文本的开始(在[和]集合中表示否定该集合)</li>
+<li>$ : 文本的结束</li>
+<li>[[:&lt;:]] : 词的开始</li>
+<li>[[:&gt;:]] : 词的结尾</li>
+<li>通过^和$可以使REGEXP的作用类似于LIKE</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="第十章-创建计算字段"><a href="#第十章-创建计算字段" class="headerlink" title="第十章 创建计算字段"></a>第十章 创建计算字段</h2><ul>
+<li>Concat(arg1,arg2,…)<ul>
+<li>这个函数在select后使用，可以将查询出来的数据以字符串的形式拼接起来 如: select Concat(名字, ‘ (‘, 城市, ‘)’)</li>
+</ul>
+</li>
+<li>RTrim()<ul>
+<li>这个函数可以做到删除数据右侧多余的空格，以此来整理数据</li>
+<li>LTrim()去掉左边多余空格</li>
+<li>Trim()去掉两边多余空格</li>
+</ul>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/22/mysql必知必会-读书笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/03/第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-05-03T13:44:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-03</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/03/第一篇博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第一篇博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/03/第一篇博客/">第一篇博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/03/hello-world/" class="archive-article-date">
-  	<time datetime="2019-05-03T13:39:16.463Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/03/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -261,8 +451,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
