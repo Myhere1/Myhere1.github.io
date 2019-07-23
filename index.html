@@ -168,13 +168,11 @@
 <h3 id="主键的条件"><a href="#主键的条件" class="headerlink" title="主键的条件"></a>主键的条件</h3><ul>
 <li>任意两行都不惧有相同的主键值</li>
 <li>每个行都必须具有一个主键值(不允许存在null)</li>
-<li><p>好习惯</p>
-<ul>
+<li>好习惯<ul>
 <li>不更新主键列中的值</li>
 <li>不重用主键列中的值</li>
 <li>不再主键列中使用可能会更改的值</li>
 </ul>
-<hr>
 </li>
 </ul>
 <h2 id="第三章-使用MySQL"><a href="#第三章-使用MySQL" class="headerlink" title="第三章 使用MySQL"></a>第三章 使用MySQL</h2><ul>
@@ -183,7 +181,6 @@
 <li>显示建表语句 show create table 表名;</li>
 <li>显示建数据库语句 show create database 数据库名;</li>
 </ul>
-<hr>
 <h2 id="第四章-索引数据"><a href="#第四章-索引数据" class="headerlink" title="第四章 索引数据"></a>第四章 索引数据</h2><ul>
 <li>去处重复 select DISTINCT 列名 from 表名<ul>
 <li>DISTINCT作用于后面的所有列，使用了这个关键字除非后面的列都相等，否则会全部都索引出来。</li>
@@ -198,7 +195,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="第五章-排序索引数据"><a href="#第五章-排序索引数据" class="headerlink" title="第五章 排序索引数据"></a>第五章 排序索引数据</h2><ul>
 <li>关系数据库设计理论认为，如果不能明确规定排序顺序，则不应该假定索引出的数据的顺序有意义。</li>
 <li>数据排序 select 列名 from 表名 order by 列名;<ul>
@@ -213,9 +209,7 @@
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="第六章-过滤数据"><a href="#第六章-过滤数据" class="headerlink" title="第六章 过滤数据"></a>第六章 过滤数据</h2><hr>
-<h2 id="第七章-数据过滤"><a href="#第七章-数据过滤" class="headerlink" title="第七章 数据过滤"></a>第七章 数据过滤</h2><ul>
+<h2 id="第六章-过滤数据"><a href="#第六章-过滤数据" class="headerlink" title="第六章 过滤数据"></a>第六章 过滤数据</h2><h2 id="第七章-数据过滤"><a href="#第七章-数据过滤" class="headerlink" title="第七章 数据过滤"></a>第七章 数据过滤</h2><ul>
 <li>在where之后and的优先级比or要高，所以在多条件组合时要注意，尽量用括号来解决。</li>
 <li>IN ()用来指定条件范围，范围中的每个条件都可以进行匹配<ul>
 <li>IN的优点<ul>
@@ -232,7 +226,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="第八章-用通配符进行过滤"><a href="#第八章-用通配符进行过滤" class="headerlink" title="第八章 用通配符进行过滤"></a>第八章 用通配符进行过滤</h2><ul>
 <li>% 表示任何字符出现任意次数(甚至是0次)<ul>
 <li>但是%通配符不能匹配null</li>
@@ -247,7 +240,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="第九章-用正则表达式进行搜索"><a href="#第九章-用正则表达式进行搜索" class="headerlink" title="第九章 用正则表达式进行搜索"></a>第九章 用正则表达式进行搜索</h2><ul>
 <li>MySQL正则表达式<ul>
 <li>REGEXP 与 like用法一致，后面跟的是正则表达式</li>
@@ -266,10 +258,7 @@
 </li>
 <li>当需要匹配特殊符号时 采用加\(两个反斜杠)的方式来区分\.表示.</li>
 <li>下面的标示用来标示前面一个字符<ul>
-<li><ul>
-<li>: 表示0个或多个匹配  + : 表示1个或多个匹配  ? : 表示0个或1个匹配</li>
-</ul>
-</li>
+<li>- : 表示0个或多个匹配  + : 表示1个或多个匹配  ? : 表示0个或1个匹配</li>
 <li>{n} : 指定数目的匹配 {n,} : 不少于指定数目的匹配 {n,m} : 匹配数目的范围(m不超过255)</li>
 <li>可以用[0-9]{4}或者[[:digit:]]{4}来代表4个数字</li>
 </ul>
@@ -279,25 +268,92 @@
 <li>$ : 文本的结束</li>
 <li>[[:&lt;:]] : 词的开始</li>
 <li>[[:&gt;:]] : 词的结尾</li>
-<li>通过^和$可以使REGEXP的作用类似于LIKE</li>
+<li>通过^和$可以使REGEXP的作用类似于LIKE<br><img src="/img/MySQL1.png" alt="88be9b6b7e3c7ae29f6b51a842bea1c6.png"></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="第十章-创建计算字段"><a href="#第十章-创建计算字段" class="headerlink" title="第十章 创建计算字段"></a>第十章 创建计算字段</h2><ul>
-<li>Concat(arg1,arg2,…)<ul>
+<li><p>Concat(arg1,arg2,…)</p>
+<ul>
 <li>这个函数在select后使用，可以将查询出来的数据以字符串的形式拼接起来 如: select Concat(名字, ‘ (‘, 城市, ‘)’)</li>
 </ul>
 </li>
-<li>RTrim()<ul>
-<li>这个函数可以做到删除数据右侧多余的空格，以此来整理数据</li>
+<li><p>RTrim()</p>
+<ul>
 <li>LTrim()去掉左边多余空格</li>
-<li>Trim()去掉两边多余空格</li>
+<li>LTrim()去掉左边多余空格</li>
+<li>S 关键字用于起别名</li>
+<li>可以在select语句后面对列进行算数运算，然后在用AS起个别名，客户机就可以像用其他列一样用这个列</li>
 </ul>
 </li>
 </ul>
+<h2 id="第十一章-使用数据处理函数"><a href="#第十一章-使用数据处理函数" class="headerlink" title="第十一章 使用数据处理函数"></a>第十一章 使用数据处理函数</h2><h3 id="常用文本处理函数"><a href="#常用文本处理函数" class="headerlink" title="常用文本处理函数"></a>常用文本处理函数</h3><p><img src="/img/MySQL2.png" alt="c898a4e0ffc558bf2f34d848060f77d4.png"><br><img src="/img/MySQL3.png" alt="8119dc2d78cb36bb4ebc7efa277dcba6.png"></p>
+<ul>
+<li>SOUNDEX()<ul>
+<li>是一个将任何文本串转换为描述其语音表示的字母数字模式的算法</li>
+<li>用于匹配发音类似的值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cust_name, cust_contact</span><br><span class="line">FROM customers</span><br><span class="line">where SOUNDEX(cust_contact)= SOUNDEX(&apos;Y.Lie&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="日期处理函数"><a href="#日期处理函数" class="headerlink" title="日期处理函数"></a>日期处理函数</h3><p><img src="/img/MySQL4.png" alt="7fd39b88c3687b403caa7cf9d7634c49.png"></p>
+<ul>
+<li><p>日期必须为yyyy-mm-dd格式</p>
+<ul>
+<li>不过当你想要用日期和表中的日期相比较时，你应当使用Date()函数</li>
+<li>Date()函数指示MySQL仅提取日期部分，例:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cust_id, order_num</span><br><span class="line"> from orders</span><br><span class="line"> where Date(order_date) = &apos;2005-09-01&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>当你只想要时间时，可以使用Time()</p>
+</li>
+<li>如果你想检索出2005年9月下的所有订单，你可以用下面两种方法<ul>
+<li><code>where Date(order_date) BETWEEN &#39;2005-09-01&#39; and &#39;2005-09-30&#39;;</code></li>
+<li><code>where Year(order_date) = 2005 and Month(order_date) = 9;</code><h3 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h3><img src="/img/MySQL5.png" alt="961ce1abb9d1348c56c8a776f101fce4.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="第十二章-汇总数据"><a href="#第十二章-汇总数据" class="headerlink" title="第十二章 汇总数据"></a>第十二章 汇总数据</h2><h3 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h3><p><img src="/img/MySQL6.png" alt="68c8d3be1854616fd32392ede186a1d4.png"></p>
+<ul>
+<li>AVG()函数<ul>
+<li>求平均值</li>
+<li>忽略值为null的行</li>
+</ul>
+</li>
+<li>COUNT()函数<ul>
+<li>COUNT(*) : 返回总的行数，不管是列中是否为空(null)</li>
+<li>COUNT(column) : 有指定的列名时，指定列的值null的时候，被忽略</li>
+</ul>
+</li>
+<li>聚集不同值<ul>
+<li>使用DISTINCT关键字，比如说AVG(DISTINCT price)，取平均值时，只考虑不同价格的。</li>
+<li>使用DISTINCT关键字，必须使用列名不能用于计算或表达式</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十三章-分组数据"><a href="#第十三章-分组数据" class="headerlink" title="第十三章 分组数据"></a>第十三章 分组数据</h2><ul>
+<li>分组例子<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select vend_id, count(*)</span><br><span class="line">from products</span><br><span class="line">group by vend_id;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><ul>
+<li>重要规定<ol>
+<li>GROUP BY可以包含任意数量的列，使得能对分组进行嵌套，为数据分组提供更细致的控制</li>
+<li>GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。就是说，在建立分组时，指定的所有列都一起计算</li>
+<li>GROUP BY子句中列出的每个列都必须是<strong>检索列</strong>或<strong>有效的表达式</strong>(但<strong>不能</strong>是聚集函数)。如果在select中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名</li>
+<li>除聚集计算语句外，select语句中的每个列都必须在GROUP BY子句中给出</li>
+<li>如果愤怒中具有多个null值，则null将作为一个分组返回。如果有多个null，它们将分为一组</li>
+<li>GROUP BY子句必须出现在WHERE子句后，ORDER BY子句之前</li>
+</ol>
+</li>
+<li>使用ROLLUP<ul>
+<li>可以得到每个分组以及每个分组汇总级别(针对每个分组)的值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select vend_id, count(*) as num_prods</span><br><span class="line">FROM products</span><br><span class="line">GROUP BY vend_id with ROLLUP</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>结果:<br><img src="/img/MySQL7.png" alt="cb80bca4ce3f21e3ada17c1502f54b30.png"></p>
 
       
 
@@ -306,6 +362,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -431,6 +498,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -512,7 +583,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">爱生活&lt;br&gt;&lt;br&gt;爱数码&lt;br&gt;爱技术</div>
   	  	
     	</section>
     
