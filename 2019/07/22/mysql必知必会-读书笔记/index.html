@@ -16,7 +16,7 @@
 <meta property="og:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯 不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-24T02:48:24.364Z">
+<meta property="og:updated_time" content="2019-07-31T05:27:57.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql必知必会 读书笔记">
 <meta name="twitter:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯 不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值">
@@ -161,14 +161,14 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-22T00:02:35.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-22</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-24T02:48:24.364Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-24</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-31T05:27:57.237Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-31</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1944 个字)
+                    13 分钟 读完 (大约 1885 个字)
                 </span>
                 
                 
@@ -287,7 +287,7 @@
 <li>$ : 文本的结束</li>
 <li>[[:&lt;:]] : 词的开始</li>
 <li>[[:&gt;:]] : 词的结尾</li>
-<li>通过^和$可以使REGEXP的作用类似于LIKE<br><img src="/img/MySQL1.png" alt="88be9b6b7e3c7ae29f6b51a842bea1c6.png"></li>
+<li>通过^和$可以使REGEXP的作用类似于LIKE<br><img src="/img/MySQL/MySQL1.png" alt></li>
 </ul>
 </li>
 </ul>
@@ -308,7 +308,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="第十一章-使用数据处理函数"><a href="#第十一章-使用数据处理函数" class="headerlink" title="第十一章 使用数据处理函数"></a>第十一章 使用数据处理函数</h2><h3 id="常用文本处理函数"><a href="#常用文本处理函数" class="headerlink" title="常用文本处理函数"></a>常用文本处理函数</h3><p><img src="/img/MySQL2.png" alt="c898a4e0ffc558bf2f34d848060f77d4.png"><br><img src="/img/MySQL3.png" alt="8119dc2d78cb36bb4ebc7efa277dcba6.png"></p>
+<h2 id="第十一章-使用数据处理函数"><a href="#第十一章-使用数据处理函数" class="headerlink" title="第十一章 使用数据处理函数"></a>第十一章 使用数据处理函数</h2><h3 id="常用文本处理函数"><a href="#常用文本处理函数" class="headerlink" title="常用文本处理函数"></a>常用文本处理函数</h3><p><img src="/img/MySQL/MySQL2.png" alt><br><img src="/img/MySQL/MySQL3.png" alt></p>
 <ul>
 <li>SOUNDEX()<ul>
 <li>是一个将任何文本串转换为描述其语音表示的字母数字模式的算法</li>
@@ -317,7 +317,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="日期处理函数"><a href="#日期处理函数" class="headerlink" title="日期处理函数"></a>日期处理函数</h3><p><img src="/img/MySQL4.png" alt="7fd39b88c3687b403caa7cf9d7634c49.png"></p>
+<h3 id="日期处理函数"><a href="#日期处理函数" class="headerlink" title="日期处理函数"></a>日期处理函数</h3><p><img src="/img/MySQL/MySQL4.png" alt></p>
 <ul>
 <li><p>日期必须为yyyy-mm-dd格式</p>
 <ul>
@@ -330,11 +330,11 @@
 </li>
 <li>如果你想检索出2005年9月下的所有订单，你可以用下面两种方法<ul>
 <li><code>where Date(order_date) BETWEEN &#39;2005-09-01&#39; and &#39;2005-09-30&#39;;</code></li>
-<li><code>where Year(order_date) = 2005 and Month(order_date) = 9;</code><h3 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h3><img src="/img/MySQL5.png" alt="961ce1abb9d1348c56c8a776f101fce4.png"></li>
+<li><code>where Year(order_date) = 2005 and Month(order_date) = 9;</code><h3 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h3><img src="/img/MySQL/MySQL5.png" alt></li>
 </ul>
 </li>
 </ul>
-<h2 id="第十二章-汇总数据"><a href="#第十二章-汇总数据" class="headerlink" title="第十二章 汇总数据"></a>第十二章 汇总数据</h2><h3 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h3><p><img src="/img/MySQL6.png" alt="68c8d3be1854616fd32392ede186a1d4.png"></p>
+<h2 id="第十二章-汇总数据"><a href="#第十二章-汇总数据" class="headerlink" title="第十二章 汇总数据"></a>第十二章 汇总数据</h2><h3 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h3><p><img src="/img/MySQL/MySQL6.png" alt></p>
 <ul>
 <li>AVG()函数<ul>
 <li>求平均值</li>
@@ -372,7 +372,7 @@
 </ul>
 </li>
 </ul>
-<p>结果:<br><img src="/img/MySQL7.png" alt="cb80bca4ce3f21e3ada17c1502f54b30.png"></p>
+<p>结果:<br><img src="/img/MySQL/MySQL7.png" alt></p>
 
         </div>
         
@@ -433,6 +433,20 @@
 </div>
 
 
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/Mybatis延迟加载和缓存/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Mybatis延迟加载和缓存</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
 
 
 

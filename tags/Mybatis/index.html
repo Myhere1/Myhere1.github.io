@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: mysql - Myhere1的技术小屋</title>
+<title>标签: Mybatis - Myhere1的技术小屋</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Myhere1的技术小屋">
-<meta property="og:url" content="https://myhere1.github.io/tags/mysql/index.html">
+<meta property="og:url" content="https://myhere1.github.io/tags/Mybatis/index.html">
 <meta property="og:site_name" content="Myhere1的技术小屋">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
@@ -144,7 +144,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">mysql</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Mybatis</a></li>
         </ul>
         </nav>
     </div>
@@ -155,22 +155,22 @@
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/22/mysql必知必会-读书笔记/"><i class="fas fa-angle-double-right"></i>mysql必知必会 读书笔记</a>
+                <a class="has-link-black-ter" href="/2019/07/30/Mybatis延迟加载和缓存/"><i class="fas fa-angle-double-right"></i>Mybatis延迟加载和缓存</a>
             
         </h1>
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-22T00:02:35.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-22</time>
+                <time class="level-item has-text-grey" datetime="2019-07-30T13:37:58.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-30</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-31T05:27:57.237Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-31</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-07-31T05:46:34.903Z"><i class="far fa-calendar-check">&nbsp;</i>2019-07-31</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1885 个字)
+                    9 分钟 读完 (大约 1296 个字)
                 </span>
                 
                 
@@ -179,14 +179,12 @@
         
     
         <div class="content">
-            <h2 id="第一章-了解SQL"><a href="#第一章-了解SQL" class="headerlink" title="第一章 了解SQL"></a>第一章 了解SQL</h2><h3 id="数据库概念"><a href="#数据库概念" class="headerlink" title="数据库概念"></a>数据库概念</h3><p>​   数据库是一种以某种有组织的方式存储的数据集合</p>
-<h3 id="主键的条件"><a href="#主键的条件" class="headerlink" title="主键的条件"></a>主键的条件</h3><ul>
-<li>任意两行都不惧有相同的主键值</li>
-<li>每个行都必须具有一个主键值(不允许存在null)</li>
-<li>好习惯<ul>
-<li>不更新主键列中的值</li>
-<li>不重用主键列中的值</li>
-<li>不再主键列中使用可能会更改的值</li></ul></li></ul>
+            <h2 id="Mybatis中的延迟加载"><a href="#Mybatis中的延迟加载" class="headerlink" title="Mybatis中的延迟加载"></a>Mybatis中的延迟加载</h2><h3 id="延迟加载的引入"><a href="#延迟加载的引入" class="headerlink" title="延迟加载的引入"></a>延迟加载的引入</h3><p>引入问题:在一对多中，当我们有一个用户，它有100个账户。</p>
+<ul>
+<li>在查询用户的时候要不要把所有的账户都查询出来？</li>
+<li>在查询账户的时候，要不要把关联的用户查出来？<br>&nbsp;</li>
+<li>在查询用户时，用户下的账户信息应当是，什么时候用，什么时候查询出来</li>
+<li>在查询账户时，账户所属的用户信息应当是随着账户查询时一起查询出来</li></ul>
         </div>
         
         
@@ -197,13 +195,13 @@
                 
                 <div class="level-item is-size-7 is-uppercase">
                     <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/mysql/">mysql</a>
+                    <a class="has-link-grey -link" href="/tags/Mybatis/">Mybatis</a>
                 </div>
                 
             </div>
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/22/mysql必知必会-读书笔记/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2019/07/30/Mybatis延迟加载和缓存/#more">阅读更多</a>
                 </div>
             </div>
         </div>
