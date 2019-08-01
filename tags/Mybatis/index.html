@@ -155,6 +155,68 @@
     <div class="card-content article ">
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
+                <a class="has-link-black-ter" href="/2019/07/31/Mybatis基于注解开发/"><i class="fas fa-angle-double-right"></i>Mybatis基于注解开发</a>
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-31T06:10:28.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-31</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-01T03:20:49.599Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-01</time>
+                
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1125 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+    
+        <div class="content">
+            <h1 id="使用Mybatis注解实现基本的CRUD"><a href="#使用Mybatis注解实现基本的CRUD" class="headerlink" title="使用Mybatis注解实现基本的CRUD"></a>使用Mybatis注解实现基本的CRUD</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>SqlMapConfig.xml的配置<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-meta">&lt;!DOCTYPE configuration</span></span><br><span class="line"><span class="hljs-meta">        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="hljs-meta">        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--引入外部配置文件--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">"jdbcConfig.properties"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置别名--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置的是实体类所在位置--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"com.xushui.domain"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">package</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 配置环境 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">"mysql"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"mysql"</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"JDBC"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"driver"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"$&#123;jdbc.driver&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"$&#123;jdbc.url&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"$&#123;jdbc.username&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password "</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"$&#123;jdbc.password&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--指定带有注解的dao接口所在位置--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置的是dao所在位置--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"com.xushui.dao"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">package</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+        </div>
+        
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-mobile is-flex">
+            <div class="level-start">
+                
+                <div class="level-item is-size-7 is-uppercase">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/Mybatis/">Mybatis</a>
+                </div>
+                
+            </div>
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/31/Mybatis基于注解开发/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
                 <a class="has-link-black-ter" href="/2019/07/30/Mybatis延迟加载和缓存/"><i class="fas fa-angle-double-right"></i>Mybatis延迟加载和缓存</a>
             
         </h1>
@@ -365,7 +427,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a>
+        <a href="/tags/Mybatis/" style="font-size: 20px;">Mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a>
     </div>
 </div>
 
@@ -476,7 +538,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mybatis/">
                         <span class="tag">Mybatis</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -606,7 +668,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Mybatis/">
                         <span class="tag">Mybatis</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
