@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>mysql必知必会 读书笔记 - Myhere1的技术小屋</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯 不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql必知必会 读书笔记">
+<meta property="og:url" content="https://myhere1.github.io/2019/07/22/MySQL必知必会-读书笔记/index.html">
+<meta property="og:site_name" content="Myhere1的技术小屋">
+<meta property="og:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯 不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-03T12:21:07.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql必知必会 读书笔记">
+<meta name="twitter:description" content="第一章 了解SQL数据库概念​   数据库是一种以某种有组织的方式存储的数据集合 主键的条件 任意两行都不惧有相同的主键值 每个行都必须具有一个主键值(不允许存在null) 好习惯 不更新主键列中的值 不重用主键列中的值 不再主键列中使用可能会更改的值">
+<meta name="twitter:image" content="https://myhere1.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="mysql必知必会 读书笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>mysql必知必会 读书笔记
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-22T00:02:35.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-22</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-03T12:21:07.714Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-03</time>
+                
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1885 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+    
+        <div class="content">
+            <h2 id="第一章-了解SQL"><a href="#第一章-了解SQL" class="headerlink" title="第一章 了解SQL"></a>第一章 了解SQL</h2><h3 id="数据库概念"><a href="#数据库概念" class="headerlink" title="数据库概念"></a>数据库概念</h3><p>​   数据库是一种以某种有组织的方式存储的数据集合</p>
+<h3 id="主键的条件"><a href="#主键的条件" class="headerlink" title="主键的条件"></a>主键的条件</h3><ul>
+<li>任意两行都不惧有相同的主键值</li>
+<li>每个行都必须具有一个主键值(不允许存在null)</li>
+<li>好习惯<ul>
+<li>不更新主键列中的值</li>
+<li>不重用主键列中的值</li>
+<li>不再主键列中使用可能会更改的值<a id="more"></a>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三章-使用MySQL"><a href="#第三章-使用MySQL" class="headerlink" title="第三章 使用MySQL"></a>第三章 使用MySQL</h2><ul>
+<li>显示表列 show columns from 表名;(describe 表名)</li>
+<li>自增 auto_increment</li>
+<li>显示建表语句 show create table 表名;</li>
+<li>显示建数据库语句 show create database 数据库名;</li>
+</ul>
+<h2 id="第四章-索引数据"><a href="#第四章-索引数据" class="headerlink" title="第四章 索引数据"></a>第四章 索引数据</h2><ul>
+<li>去处重复 select DISTINCT 列名 from 表名<ul>
+<li>DISTINCT作用于后面的所有列，使用了这个关键字除非后面的列都相等，否则会全部都索引出来。</li>
+</ul>
+</li>
+<li>限制结果 select 列名 from 表名 limit 5;<ul>
+<li>表示返回前5行</li>
+<li>为了得出下一个五行 select 列名 from 表名 limit 5,5;<ul>
+<li>从第五行开始往后索引5条记录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第五章-排序索引数据"><a href="#第五章-排序索引数据" class="headerlink" title="第五章 排序索引数据"></a>第五章 排序索引数据</h2><ul>
+<li>关系数据库设计理论认为，如果不能明确规定排序顺序，则不应该假定索引出的数据的顺序有意义。</li>
+<li>数据排序 select 列名 from 表名 order by 列名;<ul>
+<li>在where关键字之后使用</li>
+<li>可以使用非索引的列作为排序的依据</li>
+<li>也可以用多个列作为排序的依据，按代码的顺序，来决定主次，如果主列中的值都是唯一的，则不会用次列的值排序</li>
+<li>数据逆序排列 select 列名 from 表名 order by 列名 DESC;<ul>
+<li>在需要逆序排列的列名后加上DESC关键字</li>
+<li>正序是ASC，是默认值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第六章-过滤数据"><a href="#第六章-过滤数据" class="headerlink" title="第六章 过滤数据"></a>第六章 过滤数据</h2><h2 id="第七章-数据过滤"><a href="#第七章-数据过滤" class="headerlink" title="第七章 数据过滤"></a>第七章 数据过滤</h2><ul>
+<li>在where之后and的优先级比or要高，所以在多条件组合时要注意，尽量用括号来解决。</li>
+<li>IN ()用来指定条件范围，范围中的每个条件都可以进行匹配<ul>
+<li>IN的优点<ul>
+<li>语法更清除直观</li>
+<li>计算次序更容易管理</li>
+<li>IN操作符比OR操作符清单执行更快</li>
+<li>IN的可以包含其他select语句，能够动态的建立Where子句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NOT操作符否定之后所跟的任何条件<ul>
+<li>MySQL支持对IN、BETWEEN、EXISTS子句取反</li>
+</ul>
+</li>
+</ul>
+<h2 id="第八章-用通配符进行过滤"><a href="#第八章-用通配符进行过滤" class="headerlink" title="第八章 用通配符进行过滤"></a>第八章 用通配符进行过滤</h2><ul>
+<li>% 表示任何字符出现任意次数(甚至是0次)<ul>
+<li>但是%通配符不能匹配null</li>
+</ul>
+</li>
+<li>_ 表示任何字符出现一次</li>
+<li>关于通配符的技巧<ul>
+<li>通配符会让搜索时间变长</li>
+<li>不要过度使用通配符，如果其他操作可以达到相同的目的，就应该使用其他操作符</li>
+<li>确实需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处</li>
+<li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="第九章-用正则表达式进行搜索"><a href="#第九章-用正则表达式进行搜索" class="headerlink" title="第九章 用正则表达式进行搜索"></a>第九章 用正则表达式进行搜索</h2><ul>
+<li>MySQL正则表达式<ul>
+<li>REGEXP 与 like用法一致，后面跟的是正则表达式</li>
+<li>MySQL中的正则表达式匹配不区分大小写，为区分大小写，可以使用BINARY关键字，如:where 列名 REGEXP BINARY ‘字符串’;</li>
+<li>比起LIKE匹配整串而REGEXP匹配子串</li>
+</ul>
+</li>
+<li>正则表达式<ul>
+<li>. 表示任意一个字符</li>
+<li>| 表示或</li>
+<li>[和] [123]表示1或2或3，可以理解为[1|2|3]<ul>
+<li>可以用^来取反 [^123]就匹配除这些字符以外的字符</li>
+<li>[0-9] 匹配数字0-9</li>
+<li>[a-z] 匹配所有的字母</li>
+</ul>
+</li>
+<li>当需要匹配特殊符号时 采用加\(两个反斜杠)的方式来区分\.表示.</li>
+<li>下面的标示用来标示前面一个字符<ul>
+<li>- : 表示0个或多个匹配  + : 表示1个或多个匹配  ? : 表示0个或1个匹配</li>
+<li>{n} : 指定数目的匹配 {n,} : 不少于指定数目的匹配 {n,m} : 匹配数目的范围(m不超过255)</li>
+<li>可以用[0-9]{4}或者[[:digit:]]{4}来代表4个数字</li>
+</ul>
+</li>
+<li>定位符<ul>
+<li>^ : 文本的开始(在[和]集合中表示否定该集合)</li>
+<li>$ : 文本的结束</li>
+<li>[[:&lt;:]] : 词的开始</li>
+<li>[[:&gt;:]] : 词的结尾</li>
+<li>通过^和$可以使REGEXP的作用类似于LIKE<br><img src="/img/MySQL/MySQL1.png" alt></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十章-创建计算字段"><a href="#第十章-创建计算字段" class="headerlink" title="第十章 创建计算字段"></a>第十章 创建计算字段</h2><ul>
+<li><p>Concat(arg1,arg2,…)</p>
+<ul>
+<li>这个函数在select后使用，可以将查询出来的数据以字符串的形式拼接起来 如: select Concat(名字, ‘ (‘, 城市, ‘)’)</li>
+</ul>
+</li>
+<li><p>RTrim()</p>
+<ul>
+<li>LTrim()去掉左边多余空格</li>
+<li>LTrim()去掉左边多余空格</li>
+<li>S 关键字用于起别名</li>
+<li>可以在select语句后面对列进行算数运算，然后在用AS起个别名，客户机就可以像用其他列一样用这个列</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十一章-使用数据处理函数"><a href="#第十一章-使用数据处理函数" class="headerlink" title="第十一章 使用数据处理函数"></a>第十一章 使用数据处理函数</h2><h3 id="常用文本处理函数"><a href="#常用文本处理函数" class="headerlink" title="常用文本处理函数"></a>常用文本处理函数</h3><p><img src="/img/MySQL/MySQL2.png" alt><br><img src="/img/MySQL/MySQL3.png" alt></p>
+<ul>
+<li>SOUNDEX()<ul>
+<li>是一个将任何文本串转换为描述其语音表示的字母数字模式的算法</li>
+<li>用于匹配发音类似的值<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> cust_name, cust_contact</span><br><span class="line"><span class="hljs-keyword">FROM</span> customers</span><br><span class="line"><span class="hljs-keyword">where</span> <span class="hljs-keyword">SOUNDEX</span>(cust_contact)= <span class="hljs-keyword">SOUNDEX</span>(<span class="hljs-string">'Y.Lie'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="日期处理函数"><a href="#日期处理函数" class="headerlink" title="日期处理函数"></a>日期处理函数</h3><p><img src="/img/MySQL/MySQL4.png" alt></p>
+<ul>
+<li><p>日期必须为yyyy-mm-dd格式</p>
+<ul>
+<li>不过当你想要用日期和表中的日期相比较时，你应当使用Date()函数</li>
+<li>Date()函数指示MySQL仅提取日期部分，例:<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> cust_id, order_num</span><br><span class="line"> <span class="hljs-keyword">from</span> orders</span><br><span class="line"> <span class="hljs-keyword">where</span> <span class="hljs-built_in">Date</span>(order_date) = <span class="hljs-string">'2005-09-01'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>当你只想要时间时，可以使用Time()</p>
+</li>
+<li>如果你想检索出2005年9月下的所有订单，你可以用下面两种方法<ul>
+<li><code>where Date(order_date) BETWEEN &#39;2005-09-01&#39; and &#39;2005-09-30&#39;;</code></li>
+<li><code>where Year(order_date) = 2005 and Month(order_date) = 9;</code><h3 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h3><img src="/img/MySQL/MySQL5.png" alt></li>
+</ul>
+</li>
+</ul>
+<h2 id="第十二章-汇总数据"><a href="#第十二章-汇总数据" class="headerlink" title="第十二章 汇总数据"></a>第十二章 汇总数据</h2><h3 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h3><p><img src="/img/MySQL/MySQL6.png" alt></p>
+<ul>
+<li>AVG()函数<ul>
+<li>求平均值</li>
+<li>忽略值为null的行</li>
+</ul>
+</li>
+<li>COUNT()函数<ul>
+<li>COUNT(*) : 返回总的行数，不管是列中是否为空(null)</li>
+<li>COUNT(column) : 有指定的列名时，指定列的值null的时候，被忽略</li>
+</ul>
+</li>
+<li>聚集不同值<ul>
+<li>使用DISTINCT关键字，比如说AVG(DISTINCT price)，取平均值时，只考虑不同价格的。</li>
+<li>使用DISTINCT关键字，必须使用列名不能用于计算或表达式</li>
+</ul>
+</li>
+</ul>
+<h2 id="第十三章-分组数据"><a href="#第十三章-分组数据" class="headerlink" title="第十三章 分组数据"></a>第十三章 分组数据</h2><ul>
+<li>分组例子<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> vend_id, <span class="hljs-keyword">count</span>(*)</span><br><span class="line"><span class="hljs-keyword">from</span> products</span><br><span class="line"><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> vend_id;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><ul>
+<li>重要规定<ol>
+<li>GROUP BY可以包含任意数量的列，使得能对分组进行嵌套，为数据分组提供更细致的控制</li>
+<li>GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。就是说，在建立分组时，指定的所有列都一起计算</li>
+<li>GROUP BY子句中列出的每个列都必须是<strong>检索列</strong>或<strong>有效的表达式</strong>(但<strong>不能</strong>是聚集函数)。如果在select中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名</li>
+<li>除聚集计算语句外，select语句中的每个列都必须在GROUP BY子句中给出</li>
+<li>如果愤怒中具有多个null值，则null将作为一个分组返回。如果有多个null，它们将分为一组</li>
+<li>GROUP BY子句必须出现在WHERE子句后，ORDER BY子句之前</li>
+</ol>
+</li>
+<li>使用ROLLUP<ul>
+<li>可以得到每个分组以及每个分组汇总级别(针对每个分组)的值<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> vend_id, <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">as</span> num_prods</span><br><span class="line"><span class="hljs-keyword">FROM</span> products</span><br><span class="line"><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> vend_id <span class="hljs-keyword">with</span> <span class="hljs-keyword">ROLLUP</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>结果:<br><img src="/img/MySQL/MySQL7.png" alt></p>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="https://myhere1.github.io/2019/07/22/MySQL必知必会-读书笔记/">mysql必知必会 读书笔记</a></li>
+            <li><strong>本文作者：</strong><a href="https://myhere1.github.io">Myhere1</a></li>
+            <li><strong>本文链接：</strong><a href="https://myhere1.github.io/2019/07/22/MySQL必知必会-读书笔记/">https://myhere1.github.io/2019/07/22/MySQL必知必会-读书笔记/</a></li>
+            <li><strong>发布时间：</strong>2019-07-22</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MySQL/">MySQL</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.JPG" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.JPG" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/Mybatis延迟加载和缓存/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Mybatis延迟加载和缓存</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'fe1c3ffd3c6ab229fdef',
+        clientSecret: '2c4e9b413cbcb3bf3aab073bc05bac0010f231eb',
+        id: '33de08f1d6a7c8523bb413aaff51f84f',
+        repo: 'Myhere1.github.io',
+        owner: 'Myhere1',
+        admin: "Myhere1",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#第一章-了解SQL">
+        <span class="has-mr-6">1</span>
+        <span>第一章 了解SQL</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#数据库概念">
+        <span class="has-mr-6">1.1</span>
+        <span>数据库概念</span>
+        </a></li><li>
+        <a class="is-flex" href="#主键的条件">
+        <span class="has-mr-6">1.2</span>
+        <span>主键的条件</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第三章-使用MySQL">
+        <span class="has-mr-6">2</span>
+        <span>第三章 使用MySQL</span>
+        </a></li><li>
+        <a class="is-flex" href="#第四章-索引数据">
+        <span class="has-mr-6">3</span>
+        <span>第四章 索引数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#第五章-排序索引数据">
+        <span class="has-mr-6">4</span>
+        <span>第五章 排序索引数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#第六章-过滤数据">
+        <span class="has-mr-6">5</span>
+        <span>第六章 过滤数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#第七章-数据过滤">
+        <span class="has-mr-6">6</span>
+        <span>第七章 数据过滤</span>
+        </a></li><li>
+        <a class="is-flex" href="#第八章-用通配符进行过滤">
+        <span class="has-mr-6">7</span>
+        <span>第八章 用通配符进行过滤</span>
+        </a></li><li>
+        <a class="is-flex" href="#第九章-用正则表达式进行搜索">
+        <span class="has-mr-6">8</span>
+        <span>第九章 用正则表达式进行搜索</span>
+        </a></li><li>
+        <a class="is-flex" href="#第十章-创建计算字段">
+        <span class="has-mr-6">9</span>
+        <span>第十章 创建计算字段</span>
+        </a></li><li>
+        <a class="is-flex" href="#第十一章-使用数据处理函数">
+        <span class="has-mr-6">10</span>
+        <span>第十一章 使用数据处理函数</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#常用文本处理函数">
+        <span class="has-mr-6">10.1</span>
+        <span>常用文本处理函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#日期处理函数">
+        <span class="has-mr-6">10.2</span>
+        <span>日期处理函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#数值处理函数">
+        <span class="has-mr-6">10.3</span>
+        <span>数值处理函数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第十二章-汇总数据">
+        <span class="has-mr-6">11</span>
+        <span>第十二章 汇总数据</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#聚集函数">
+        <span class="has-mr-6">11.1</span>
+        <span>聚集函数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第十三章-分组数据">
+        <span class="has-mr-6">12</span>
+        <span>第十三章 分组数据</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#GROUP-BY">
+        <span class="has-mr-6">12.1</span>
+        <span>GROUP BY</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="mysql必知必会 读书笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Myhere1&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
