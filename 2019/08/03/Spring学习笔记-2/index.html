@@ -16,7 +16,7 @@
 <meta property="og:description" content="基于注解的IOC配置创建对象作用与xml配置文件中的&amp;lt;bean&amp;gt;标签实现的功能是一样的  @Component:  作用: 用于把当前类对象存入Spring容器中 属性:  value: 用于指定bean的id，默认值为当前类名(首字母改为小写)      以下三种作用和属性和@Component是一样的，是Spring框架提供的明确三层使用的注解。  @Controller: 一般用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-04T09:20:03.573Z">
+<meta property="og:updated_time" content="2019-08-06T23:41:17.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring学习笔记(2)">
 <meta name="twitter:description" content="基于注解的IOC配置创建对象作用与xml配置文件中的&amp;lt;bean&amp;gt;标签实现的功能是一样的  @Component:  作用: 用于把当前类对象存入Spring容器中 属性:  value: 用于指定bean的id，默认值为当前类名(首字母改为小写)      以下三种作用和属性和@Component是一样的，是Spring框架提供的明确三层使用的注解。  @Controller: 一般用">
@@ -161,7 +161,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-03T12:39:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-08-03</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-04T09:20:03.573Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-04</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-06T23:41:17.953Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-07</time>
                 
                 
                 
@@ -218,7 +218,7 @@
 <li>细节: 使用注解注入，set方法不是必须的</li>
 </ul>
 <h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h3><ul>
-<li>作用: 在按照类中注入的基础之上再按照名称注入，它在给成员变量注入时不能单独使用(要和<code>@AutoWired</code>注解一起使用)，但是再给方法参数注入时可以</li>
+<li>作用: 在按照类中注入的基础之上再按照名称注入，它在给成员变量注入时不能单独使用(要和<code>@AutoWired</code>注解一起使用)，但是在给方法参数注入时可以</li>
 <li>属性: <ul>
 <li><code>value</code>: 用于指定注入bean的id</li>
 </ul>
@@ -258,11 +258,11 @@
 </ul>
 <hr>
 <h2 id="生命周期-了解"><a href="#生命周期-了解" class="headerlink" title="生命周期(了解)"></a>生命周期(了解)</h2><p>作用与<code>&lt;bean&gt;</code>标签中使用<code>init-method</code>和<code>destroy-method</code>的作用是一样的</p>
-<h3 id="PreDestroy"><a href="#PreDestroy" class="headerlink" title="@PreDestroy"></a>@PreDestroy</h3><ul>
-<li>作用: 用于指定销毁方法</li>
-</ul>
 <h3 id="PostConstruct"><a href="#PostConstruct" class="headerlink" title="@PostConstruct"></a>@PostConstruct</h3><ul>
 <li>作用: 用于指定初始化方法</li>
+</ul>
+<h3 id="PreDestroy"><a href="#PreDestroy" class="headerlink" title="@PreDestroy"></a>@PreDestroy</h3><ul>
+<li>作用: 用于指定销毁方法</li>
 </ul>
 <hr>
 <h2 id="实现注解IOC配置需要的操作"><a href="#实现注解IOC配置需要的操作" class="headerlink" title="实现注解IOC配置需要的操作"></a>实现注解IOC配置需要的操作</h2><p>告知Spring在创建容器时需要扫描的包，配置所需的标签不是在beans的约束中，而是一个叫context名称空间和约束中</p>
@@ -281,7 +281,7 @@
 <li>作用: 指定当前类为配置类</li>
 <li>细节: 当配置类作为<code>AnnotationConfigApplicationContext</code>方法的参数时，可以不写</li>
 </ul>
-<h3 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="ComponentScan"></a>ComponentScan</h3><ul>
+<h3 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan"></a>@ComponentScan</h3><ul>
 <li>作用: 用于通过注解指定Spring在创建容器时要扫描的包</li>
 <li>属性: <ul>
 <li><code>value</code>: 他和basePackages的作用是一样的，等同于在xml里配置了<code>&lt;context:component-scan base-package=&quot;com.xushui&quot;&gt;&lt;/context:component-scan&gt;</code></li>
@@ -503,13 +503,13 @@
         <span class="has-mr-6">1.4</span>
         <span>生命周期(了解)</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#PreDestroy">
-        <span class="has-mr-6">1.4.1</span>
-        <span>@PreDestroy</span>
-        </a></li><li>
         <a class="is-flex" href="#PostConstruct">
-        <span class="has-mr-6">1.4.2</span>
+        <span class="has-mr-6">1.4.1</span>
         <span>@PostConstruct</span>
+        </a></li><li>
+        <a class="is-flex" href="#PreDestroy">
+        <span class="has-mr-6">1.4.2</span>
+        <span>@PreDestroy</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#实现注解IOC配置需要的操作">
         <span class="has-mr-6">1.5</span>
@@ -529,7 +529,7 @@
         </a></li><li>
         <a class="is-flex" href="#ComponentScan">
         <span class="has-mr-6">1.7.2</span>
-        <span>ComponentScan</span>
+        <span>@ComponentScan</span>
         </a></li><li>
         <a class="is-flex" href="#Bean">
         <span class="has-mr-6">1.7.3</span>
