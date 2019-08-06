@@ -16,7 +16,7 @@
 <meta property="og:description" content="AOPAOP概述全称是Aspect Oriented Programming(面向切面编程)，可以做到把我们程序重复的代码抽取出来，在需要执行的时候，采用动态代理技术，在不修改源码的基础上，对我们已有的方法进行增强">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-05T05:40:05.727Z">
+<meta property="og:updated_time" content="2019-08-05T13:34:56.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring学习笔记(4)">
 <meta name="twitter:description" content="AOPAOP概述全称是Aspect Oriented Programming(面向切面编程)，可以做到把我们程序重复的代码抽取出来，在需要执行的时候，采用动态代理技术，在不修改源码的基础上，对我们已有的方法进行增强">
@@ -161,14 +161,14 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-05T01:27:13.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-08-05</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-05T05:40:05.727Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-05</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-05T13:34:56.039Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-05</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 868 个字)
+                    13 分钟 读完 (大约 1899 个字)
                 </span>
                 
                 
@@ -234,7 +234,7 @@
 </ul>
 <h2 id="Spring中基于XML的AOP配置"><a href="#Spring中基于XML的AOP配置" class="headerlink" title="Spring中基于XML的AOP配置"></a>Spring中基于XML的AOP配置</h2><h3 id="导入约束"><a href="#导入约束" class="headerlink" title="导入约束"></a>导入约束</h3><p>在Spring文档中搜索<code>xmlns:aop</code>，将约束导入bean.xml</p>
 <figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h3><ol>
+<h3 id="配置AOP"><a href="#配置AOP" class="headerlink" title="配置AOP"></a>配置AOP</h3><ol>
 <li>把通知Bean也交给Spring来管理</li>
 <li>使用<code>aop:config</code>标签表明开始AOP的配置</li>
 <li>使用<code>aop:aspect</code>标签开始配置切面<ul>
@@ -261,10 +261,97 @@
 <li><code>public void com.xushui.service.Impl.AccountServiceImpl.saveAccount()</code></li>
 </ul>
 </li>
+<li>通配符写法:<ul>
+<li>访问修饰符可以省略<ul>
+<li><code>void com.xushui.service.Impl.AccountServiceImpl.saveAccount()</code></li>
+</ul>
+</li>
+<li>返回值可以用通配符表示任意返回值<ul>
+<li><code>* com.xushui.service.Impl.AccountServiceImpl.saveAccount()</code></li>
+</ul>
+</li>
+<li>包名可以使用通配符，表示任意包。有几级包，就要写几个<code>*.</code><ul>
+<li><code>* *.*.*.*.AccountServiceImpl.saveAccount()</code></li>
+</ul>
+</li>
+<li>包名还可以用<code>..</code>表示当前包及其子包(表示任一包下的AccountServiceImpl的saveAccount()方法都会被增强)<ul>
+<li><code>* *..AccountServiceImpl.saveAccount()</code></li>
+</ul>
+</li>
+<li>类名和方法名都可以实现统配<ul>
+<li><code>* *..*.*()</code>: 表示所有包下所有没有参数的方法都被增强</li>
+</ul>
+</li>
+<li>参数列表<ul>
+<li>基本类型直接写名称: <code>int</code></li>
+<li>应用类型写全限定类名: <code>java.util.String</code></li>
+<li>可以用通配符(<code>*</code>)表示任意类型，但是必须有参数(没有参数的不会被增强)<ul>
+<li><code>* *..*.*(*)</code></li>
+</ul>
+</li>
+<li>可以使用<code>..</code>表示有无参数均可，有参数的话可以是任何类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>全通配写法:<ul>
+<li><code>* *..*.*(..)</code></li>
+</ul>
+</li>
+<li>实际开发中切入点表达式的通常写法:<ul>
+<li>切到业务层实现类下的所有方法<ul>
+<li><code>* com.xushui.service.Impl.*.*(..)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置表达式标签<code>&lt;aop:pointcut&gt;</code><ul>
+<li>id属性: 用于指定表达式的唯一标识</li>
+<li>expression: 用于指定表达式内容</li>
+<li>这个标签可以写在<code>&lt;aop:aspect&gt;</code>标签<strong>上面</strong>(不能写在下面会报错)，这样子所有的切面都可以使用这个表达式，写在<code>&lt;aop:aspect&gt;</code>里面，就只有这个切面可以使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置通知<ul>
+<li>前置通知: 在切入点方法之前执行</li>
+<li>后置通知: 在切入点方法<strong>正常</strong>执行之后执行(如果发生异常，则不会执行，和异常通知只能执行其中一个)</li>
+<li>异常通知: 在切入点方法执行产生异常后执行</li>
+<li>最终通知: 无论切入方法是否正常执行他都会在最后执行</li>
+<li>环绕通知: <code>&lt;aop:around method=&quot;aroundPrintLog&quot; pointcut-ref=&quot;pc1&quot;&gt;&lt;/aop:around&gt;</code><ul>
+<li>问题: 当我们配置了环绕通知之后，切入点方法没有执行，环绕通知却执行了</li>
+<li>分析: 通过对比动态代理的的环绕通知的代码，发现动态代理中有明确的切入点方法调用，而我们的代码里没有</li>
+<li>解决: Spring框架中为我们提供了<code>ProceedingJoinPoint</code>接口，里面有一个proceed()的方法，此方法就相当于明确调用切入点方法</li>
+<li>Spring中的环绕通知就是框架为我们提供的一种可以在代码中手动控制增强方法何时执行的方式<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">aroundPrintLog</span><span class="hljs-params">(ProceedingJoinPoint pjp)</span></span>&#123;</span><br><span class="line">        Object rtValue = <span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-comment">//得到方法执行所需要的参数</span></span><br><span class="line">            Object[] args = pjp.getArgs();</span><br><span class="line">            System.out.println(<span class="hljs-string">"环绕通知Logger类中的aroundPrintLog方法开始记录日志了。。。。前置"</span>);</span><br><span class="line">            <span class="hljs-comment">// 明确调用切入点方法(业务层方法)</span></span><br><span class="line">            rtValue = pjp.proceed(args);</span><br><span class="line">            System.out.println(<span class="hljs-string">"环绕通知Logger类中的aroundPrintLog方法开始记录日志了。。。。后置"</span>);</span><br><span class="line">            <span class="hljs-keyword">return</span> rtValue;</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (Throwable t)&#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"环绕通知Logger类中的aroundPrintLog方法开始记录日志了。。。。异常"</span>);</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(t);</span><br><span class="line">        &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"环绕通知Logger类中的aroundPrintLog方法开始记录日志了。。。。最终"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>bean.xml<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置Spring的IOC，把Service对象配置进来--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountService"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.xushui.service.Impl.AccountServiceImpl"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置Logger类--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"logger"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.xushui.utils.Logger"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置切面--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"logAdvice"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"logger"</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置通知类型，并建立通知方法和切入点方法的关联--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">aop:before</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"printLog"</span> <span class="hljs-attr">pointcut</span>=<span class="hljs-string">"execution(public void com.xushui.service.Impl.AccountServiceImpl.saveAccount())"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:before</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>bean.xml<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xmlns:aop</span>=<span class="hljs-string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="hljs-tag">       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/aop/spring-aop.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置Spring的IOC，把Service对象配置进来--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"accountService"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.xushui.service.Impl.AccountServiceImpl"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置Logger类--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"logger"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.xushui.utils.Logger"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span></span><br><span class="line">    	<span class="hljs-comment">&lt;!--配置表达式标签--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"pc1"</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">"execution(* com.xushui.service.Impl.*.*(..))"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:pointcut</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置切面--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"logAdvice"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"logger"</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置通知类型，并建立通知方法和切入点方法的关联--&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置前置通知--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">aop:before</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"beforePrintLog"</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">"pc1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:before</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置后置通知--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">aop:after-returning</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"afterReturningPrintLog"</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">"pc1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:after-returning</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置异常通知--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">aop:after-throwing</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"afterThrowingPrintLog"</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">"pc1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:after-throwing</span>&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--配置最终通知--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">aop:after</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"afterPrintLog"</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">"pc1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:after</span>&gt;</span></span><br><span class="line">            </span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Spring中基于注解的AOP配置"><a href="#Spring中基于注解的AOP配置" class="headerlink" title="Spring中基于注解的AOP配置"></a>Spring中基于注解的AOP配置</h2><h3 id="配置Spring开启注解AOP的支持"><a href="#配置Spring开启注解AOP的支持" class="headerlink" title="配置Spring开启注解AOP的支持"></a>配置Spring开启注解AOP的支持</h3><p>在bean.xml中添加这两句<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--配置Spring创建容器时要扫描的包--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">"com.xushui"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!--配置Spring开启注解AOP的支持--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">aop:aspectj-autoproxy</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspectj-autoproxy</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><ul>
+<li><code>@Aspect</code><ul>
+<li>作用: 表示是一个切面类</li>
+</ul>
+</li>
+<li>通知注解<ul>
+<li><code>@Before()</code>: 前置通知</li>
+<li><code>@AfterReturning()</code>: 后置通知</li>
+<li><code>@AfterThrowing()</code>: 异常通知</li>
+<li><code>@After()</code>: 最终通知</li>
+<li><code>@Around()</code>: 环绕通知</li>
+<li>以上注解的value都为表达式</li>
+</ul>
+</li>
+<li>表达式注解<ul>
+<li><code>@Pointcut()</code>: 写在方法上，方法名为id，value属性为表达式的内容。例如:<code>execution(* com.xushui.service.Impl.*.*(..))</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="基于注解方式配置的一个小问题"><a href="#基于注解方式配置的一个小问题" class="headerlink" title="基于注解方式配置的一个小问题"></a>基于注解方式配置的一个小问题</h3><p><strong>后置通知和最终通知的调用顺序会出现问题，建议要用注解配置模式的话采用环绕通知。</strong></p>
+<h3 id="完全不使用bean-xml的方法"><a href="#完全不使用bean-xml的方法" class="headerlink" title="完全不使用bean.xml的方法"></a>完全不使用bean.xml的方法</h3><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5p4ntlxeaj31im0eado1.jpg" alt></p>
 
         </div>
         
@@ -405,13 +492,33 @@
         <span class="has-mr-6">2.2.1</span>
         <span>导入约束</span>
         </a></li><li>
-        <a class="is-flex" href="#配置步骤">
+        <a class="is-flex" href="#配置AOP">
         <span class="has-mr-6">2.2.2</span>
-        <span>配置步骤</span>
+        <span>配置AOP</span>
         </a></li><li>
         <a class="is-flex" href="#示例">
         <span class="has-mr-6">2.2.3</span>
         <span>示例</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Spring中基于注解的AOP配置">
+        <span class="has-mr-6">2.3</span>
+        <span>Spring中基于注解的AOP配置</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#配置Spring开启注解AOP的支持">
+        <span class="has-mr-6">2.3.1</span>
+        <span>配置Spring开启注解AOP的支持</span>
+        </a></li><li>
+        <a class="is-flex" href="#注解">
+        <span class="has-mr-6">2.3.2</span>
+        <span>注解</span>
+        </a></li><li>
+        <a class="is-flex" href="#基于注解方式配置的一个小问题">
+        <span class="has-mr-6">2.3.3</span>
+        <span>基于注解方式配置的一个小问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#完全不使用bean-xml的方法">
+        <span class="has-mr-6">2.3.4</span>
+        <span>完全不使用bean.xml的方法</span>
         </a></li></ul></li></ul></li></ul>
         </div>
     </div>
