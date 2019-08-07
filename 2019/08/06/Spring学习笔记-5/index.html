@@ -16,7 +16,7 @@
 <meta property="og:description" content="Spring中的Template使用xml配置">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-08-06T14:07:36.872Z">
+<meta property="og:updated_time" content="2019-08-07T03:42:09.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring学习笔记(5)">
 <meta name="twitter:description" content="Spring中的Template使用xml配置">
@@ -161,14 +161,14 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-06T03:49:12.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-08-06</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-06T14:07:36.872Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-06</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-07T03:42:09.576Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-07</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 742 个字)
+                    6 分钟 读完 (大约 841 个字)
                 </span>
                 
                 
@@ -219,6 +219,14 @@
 </li>
 </ol>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--配置事务管理器--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"transactionManager"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dataSource"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"dataSource"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置事务的通知--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">tx:advice</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"txAdvice"</span> <span class="hljs-attr">transaction-manager</span>=<span class="hljs-string">"transactionManager"</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置事务的属性--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">tx:method</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"*"</span> <span class="hljs-attr">propagation</span>=<span class="hljs-string">"REQUIRED"</span> <span class="hljs-attr">read-only</span>=<span class="hljs-string">"false"</span>/&gt;</span></span><br><span class="line">            <span class="hljs-comment">&lt;!--遵循查询方法都以find开头，就可以很方便配置--&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">tx:method</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"find*"</span> <span class="hljs-attr">propagation</span>=<span class="hljs-string">"SUPPORTS"</span> <span class="hljs-attr">read-only</span>=<span class="hljs-string">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tx:method</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--配置切入点表达式--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"pc1"</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">"execution(* com.xushui.service.Impl.*.*(..))"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:pointcut</span>&gt;</span></span><br><span class="line">        <span class="hljs-comment">&lt;!--建立切入点表达式和事务通知的对应关系--&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">aop:advisor</span> <span class="hljs-attr">advice-ref</span>=<span class="hljs-string">"txAdvice"</span> <span class="hljs-attr">pointcut-ref</span>=<span class="hljs-string">"pc1"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">aop:advisor</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Spring中基于注解的声明式事务控制配置步骤"><a href="#Spring中基于注解的声明式事务控制配置步骤" class="headerlink" title="Spring中基于注解的声明式事务控制配置步骤"></a>Spring中基于注解的声明式事务控制配置步骤</h2><ol>
+<li>配置事务管理器</li>
+<li>开启Spring对注解事务的支持</li>
+<li>在需要开启事务支持的地方使用<code>@Transactional</code>注解</li>
+</ol>
+<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!--配置事务管理器--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"transactionManager"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"dataSource"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"dataSource"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- 开启Spring对注解事务的支持 --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">tx:annotation-driven</span> <span class="hljs-attr">transaction-manager</span>=<span class="hljs-string">"transactionManager"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tx:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="纯注解方式"><a href="#纯注解方式" class="headerlink" title="纯注解方式"></a>纯注解方式</h2><p>可以加上<code>@EnableTransctionManagement</code>注解实现开启Spring对注解事务的支持</p>
+
         </div>
         
             <ul class="post-copyright">
@@ -357,6 +365,18 @@
         <a class="is-flex" href="#示例">
         <span class="has-mr-6">2.2</span>
         <span>示例</span>
+        </a></li><li>
+        <a class="is-flex" href="#Spring中基于注解的声明式事务控制配置步骤">
+        <span class="has-mr-6">2.3</span>
+        <span>Spring中基于注解的声明式事务控制配置步骤</span>
+        </a></li><li>
+        <a class="is-flex" href="#示例-1">
+        <span class="has-mr-6">2.4</span>
+        <span>示例</span>
+        </a></li><li>
+        <a class="is-flex" href="#纯注解方式">
+        <span class="has-mr-6">2.5</span>
+        <span>纯注解方式</span>
         </a></li></ul></li></ul>
         </div>
     </div>
