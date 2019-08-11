@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Maven学习笔记(高级) - Myhere1的技术小屋</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="解决jar包冲突">
+<meta name="keywords" content="Maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven学习笔记(高级)">
+<meta property="og:url" content="https://myhere1.github.io/2019/08/10/Maven学习笔记-高级/index.html">
+<meta property="og:site_name" content="Myhere1的技术小屋">
+<meta property="og:description" content="解决jar包冲突">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://myhere1.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-08-11T05:07:32.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven学习笔记(高级)">
+<meta name="twitter:description" content="解决jar包冲突">
+<meta name="twitter:image" content="https://myhere1.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Maven学习笔记(高级)" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <i class="fas fa-angle-double-right"></i>Maven学习笔记(高级)
+            
+        </h1>
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-10T11:09:37.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-08-10</time>
+                
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-08-11T05:07:32.328Z"><i class="far fa-calendar-check">&nbsp;</i>2019-08-11</time>
+                
+                
+                <div class="level-item">
+                <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/maven/">maven</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1008 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+    
+        <div class="content">
+            <h1 id="解决jar包冲突"><a href="#解决jar包冲突" class="headerlink" title="解决jar包冲突"></a>解决jar包冲突</h1><a id="more"></a>
+<h2 id="第一声明优先原则"><a href="#第一声明优先原则" class="headerlink" title="第一声明优先原则"></a>第一声明优先原则</h2><ul>
+<li>jar包坐标靠上，就是先被声明的，优先使用</li>
+</ul>
+<h2 id="路径近者优先原则"><a href="#路径近者优先原则" class="headerlink" title="路径近者优先原则"></a>路径近者优先原则</h2><ul>
+<li>Maven导入jar包的一些概念:<ul>
+<li>直接依赖: 项目中直接导入的jar包，就是该项目的直接依赖包</li>
+<li>间接依赖: 项目中没有直接导入的jar包，是通过直接依赖jar包传递进来的，就是间接依赖jar包</li>
+</ul>
+</li>
+<li>路径近者优先原则，直接依赖jar包比间接依赖jar包近</li>
+</ul>
+<h2 id="直接排除法-推荐使用"><a href="#直接排除法-推荐使用" class="headerlink" title="直接排除法[推荐使用]:"></a>直接排除法[<strong>推荐使用</strong>]:</h2><ul>
+<li>直接排除法，要排除某个jar包下的依赖，可以通过<code>exclusions</code>标签</li>
+</ul>
+<h2 id="锁定jar包"><a href="#锁定jar包" class="headerlink" title="锁定jar包"></a>锁定jar包</h2><ul>
+<li>要锁定jar包，将jar包直接复制一份，粘贴到<code>dependencyManagement</code>中</li>
+</ul>
+<hr>
+<h1 id="分模块构建工程"><a href="#分模块构建工程" class="headerlink" title="分模块构建工程"></a>分模块构建工程</h1><h2 id="工程和模块的区别"><a href="#工程和模块的区别" class="headerlink" title="工程和模块的区别"></a>工程和模块的区别</h2><ul>
+<li>工程和模块都不等于是一个完整的项目，项目完整不完整看的是代码，代码完整，就可以说是一个完整的项目。</li>
+<li>工程(Project)被创建出来是独立的</li>
+<li>模块(Module)一被创建出来就是有父工程的，可以直接使用父工程的资源</li>
+<li>子模块之间一开始是没有联系的</li>
+<li>子模块之间可以通过导入坐标来建立依赖关系</li>
+</ul>
+<h2 id="项目拆分完成后的小问题"><a href="#项目拆分完成后的小问题" class="headerlink" title="项目拆分完成后的小问题"></a>项目拆分完成后的小问题</h2><p>项目拆分后web项目依赖service，service依赖dao。直接让父工程用tomcat运行可以正常使用，而web项目，用tomcat执行会发现问题<br>原因: 虽然导入的是其他模块的依赖，但是maven还是去本地仓库寻找，没有找到会去中央仓库寻找，都没找到时，会报错<br>解决方法: 将父工程在maven中安装(<code>install</code>)一下，就可以将这个工程下的所有模块都放到本地仓库<br>当提示以下信息时，这个工程下的所有模块都已放到本地仓库<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[INFO] Reactor Summary:</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] maven_day02_parent ................................. SUCCESS [  0.337 s]</span><br><span class="line">[INFO] maven_day02_dao .................................... SUCCESS [  0.937 s]</span><br><span class="line">[INFO] maven_day02_service ................................ SUCCESS [  0.053 s]</span><br><span class="line">[INFO] maven_day02_web .................................... SUCCESS [  1.369 s]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><h2 id="私服上传jar包"><a href="#私服上传jar包" class="headerlink" title="私服上传jar包"></a>私服上传jar包</h2><ol>
+<li><p>需要在客户端即部署ssm_dao工程的电脑上配置 maven环境，并修改 settings.xml 文件，在<code>servers</code>标签里配置连接私服的用户和密码。</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>releases<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span> </span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>admin<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span> </span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>admin123<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span> </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>snapshots<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>admin<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>admin123<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span> </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传模块，将以下内容粘到pom.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">distributionManagement</span>&gt;</span> </span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>releases<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://localhost:8081/nexus/content/repositories/releases/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span> </span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">snapshotRepository</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>snapshots<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://localhost:8081/nexus/content/repositories/snapshots/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span> </span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后执行deploy，就可以上传到私服(也会放到本地仓库)</p>
+</li>
+</ol>
+<h2 id="从私服上下载jar包"><a href="#从私服上下载jar包" class="headerlink" title="从私服上下载jar包"></a>从私服上下载jar包</h2><p>在maven的配置文件中找到<code>profiles</code>标签将这一段内容帖进去<br><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&lt;!-- 下载jar包配置 --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">profile</span>&gt;</span> </span><br><span class="line">	<span class="hljs-comment">&lt;!--profile的id --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>dev<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">repositories</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span> <span class="hljs-comment">&lt;!--仓库id，repositories可以配置多个仓库，保证id不重复 --&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>nexus<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span> <span class="hljs-comment">&lt;!--仓库地址，即nexus仓库组的地址 --&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://localhost:8081/nexus/content/groups/public/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span> <span class="hljs-comment">&lt;!--是否下载releases构件 --&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">releases</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">releases</span>&gt;</span> <span class="hljs-comment">&lt;!--是否下载snapshots构件 --&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">repositories</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">pluginRepositories</span>&gt;</span> <span class="hljs-comment">&lt;!-- 插件仓库，maven的运行依赖插件，也需要从私服下载插件 --&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">pluginRepository</span>&gt;</span> <span class="hljs-comment">&lt;!-- 插件仓库的id不允许重复，如果重复后边配置会覆盖前边 --&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>public<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Public Repositories<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://localhost:8081/nexus/content/groups/public/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">pluginRepository</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">pluginRepositories</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再在最下面加上这段配置，激活上面的配置<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;activeProfiles&gt;</span><br><span class="line">	&lt;activeProfile&gt;dev&lt;/activeProfile&gt;</span><br><span class="line">&lt;/activeProfiles&gt;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="安装第三方jar包"><a href="#安装第三方jar包" class="headerlink" title="安装第三方jar包"></a>安装第三方jar包</h1><h2 id="安装到本地仓库"><a href="#安装到本地仓库" class="headerlink" title="安装到本地仓库"></a>安装到本地仓库</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">----进入jar包所在目录运行</span><br><span class="line">mvn install:install-file -DgroupId=com.alibaba -DartifactId=fastjson -Dversion=1.1.37 -Dfile=fastjson-1.1.37.jar -Dpackaging=jar</span><br><span class="line">----打开终端直接运行</span><br><span class="line">mvn install:install-file -DgroupId=com.alibaba -DartifactId=fastjson -Dversion=1.1.37 -Dpackaging=jar -Dfile=完整路径\fastjson-1.1.37.jar</span><br></pre></td></tr></table></figure>
+<h2 id="安装第三方jar包到私服"><a href="#安装第三方jar包到私服" class="headerlink" title="安装第三方jar包到私服"></a>安装第三方jar包到私服</h2><ol>
+<li><p>在settings配置文件中添加登录私服第三方登录信息</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;server&gt;</span><br><span class="line">&lt;id&gt;thirdparty&lt;/id&gt;</span><br><span class="line">&lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">&lt;password&gt;admin123&lt;/password&gt;</span><br><span class="line">&lt;/server&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在终端执行命令</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 进入jar包所在目录运行</span><br><span class="line">mvn deploy:deploy-file -DgroupId=com.alibaba -DartifactId=fastjson -Dversion=1.1.37 -Dpackaging=jar -Dfile=fastjson-1.1.37.jar -Durl=http://localhost:8081/nexus/content/repositories/thirdparty/ -DrepositoryId=thirdparty</span><br><span class="line">2. 打开终端直接运行</span><br><span class="line">mvn deploy:deploy-file -DgroupId=com.alibaba -DartifactId=fastjson -Dversion=1.1.37 -Dpackaging=jar -Dfile=完整目录\fastjson-1.1.37.jar -Durl=http://localhost:8081/nexus/content/repositories/thirdparty/ -DrepositoryId=thirdparty</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+        
+            <ul class="post-copyright">
+            <li><strong>本文标题：</strong><a href="https://myhere1.github.io/2019/08/10/Maven学习笔记-高级/">Maven学习笔记(高级)</a></li>
+            <li><strong>本文作者：</strong><a href="https://myhere1.github.io">Myhere1</a></li>
+            <li><strong>本文链接：</strong><a href="https://myhere1.github.io/2019/08/10/Maven学习笔记-高级/">https://myhere1.github.io/2019/08/10/Maven学习笔记-高级/</a></li>
+            <li><strong>发布时间：</strong>2019-08-10</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+            </li>
+            </ul>
+        
+        
+        <hr style="height:1px;margin:1rem 0">
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Maven/">Maven</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/alipay.JPG" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.JPG" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/10/Maven学习笔记/">
+                <span class="level-item">Maven学习笔记(基础)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'fe1c3ffd3c6ab229fdef',
+        clientSecret: '2c4e9b413cbcb3bf3aab073bc05bac0010f231eb',
+        id: 'dd6fcf2e6e6d7ec188922d6ef79d1797',
+        repo: 'Myhere1.github.io',
+        owner: 'Myhere1',
+        admin: "Myhere1",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#解决jar包冲突">
+        <span class="has-mr-6">1</span>
+        <span>解决jar包冲突</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#第一声明优先原则">
+        <span class="has-mr-6">1.1</span>
+        <span>第一声明优先原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#路径近者优先原则">
+        <span class="has-mr-6">1.2</span>
+        <span>路径近者优先原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#直接排除法-推荐使用">
+        <span class="has-mr-6">1.3</span>
+        <span>直接排除法[推荐使用]:</span>
+        </a></li><li>
+        <a class="is-flex" href="#锁定jar包">
+        <span class="has-mr-6">1.4</span>
+        <span>锁定jar包</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分模块构建工程">
+        <span class="has-mr-6">2</span>
+        <span>分模块构建工程</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#工程和模块的区别">
+        <span class="has-mr-6">2.1</span>
+        <span>工程和模块的区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#项目拆分完成后的小问题">
+        <span class="has-mr-6">2.2</span>
+        <span>项目拆分完成后的小问题</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#私服">
+        <span class="has-mr-6">3</span>
+        <span>私服</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#私服上传jar包">
+        <span class="has-mr-6">3.1</span>
+        <span>私服上传jar包</span>
+        </a></li><li>
+        <a class="is-flex" href="#从私服上下载jar包">
+        <span class="has-mr-6">3.2</span>
+        <span>从私服上下载jar包</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#安装第三方jar包">
+        <span class="has-mr-6">4</span>
+        <span>安装第三方jar包</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装到本地仓库">
+        <span class="has-mr-6">4.1</span>
+        <span>安装到本地仓库</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装第三方jar包到私服">
+        <span class="has-mr-6">4.2</span>
+        <span>安装第三方jar包到私服</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Maven学习笔记(高级)" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Myhere1&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
